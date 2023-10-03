@@ -176,17 +176,7 @@ public class DeathMatchManager : MonoBehaviour
     public void UpdateKillsCount()
     {
         uIController.playerAICountTxt.text = counterTerroristScore.ToString();
-        Debug.Log("PlayerCountTxt is : " + counterTerroristScore);
-
-
         uIController.enemyCountTxt.text = terroristsScore.ToString();
-        Debug.Log("EnemyCountTxt is : " + terroristsScore);
-
-        Debug.Log("EnemyCount is : " + enemiesCount);
-        Debug.Log("PlayerCount is : " + playerAICount);
-
-
-
         if (playerAICount <= 1)
         {
             playerAICount = 3;
@@ -229,7 +219,6 @@ public class DeathMatchManager : MonoBehaviour
     public void ShowTeamStats()
     {
         //game player data assingning
-        Debug.Log("Total Kills by Player " + totalKills_player);
         uIController.gamePlayerNameTxt.text = playerName.ToString();
         uIController.gamePlayerFlag.sprite = playerFlag;
 
@@ -267,14 +256,10 @@ public class DeathMatchManager : MonoBehaviour
                 uIController.IngameControls.SetActive(false);
 
                 Time.timeScale = 0;
-                if (PlayerPrefs.GetInt("AdsRemove") == 0)
-                {
                     if (AdManager.Instance)
                     {
-                        //AdManager.Instance.ShowBannerRectAdmob(true);
                         AdManager.Instance.ExecuteSequence_Interstitial(0);
                     }
-                }
                 GameplaySoundController.instance.DisableAllRandomSounds();
                 FirebaseAnalyticsController.CustomAnalyticEvent("TDM_Pause_Screen_Loaded");
                 break;
@@ -453,20 +438,6 @@ public class DeathMatchManager : MonoBehaviour
                 GameObject playerAI = Instantiate(playersAI[i].t_Players,
                     playersAI[i].t_SpawnPos[randPosNumber].position,
                     playersAI[i].t_SpawnPos[randPosNumber].rotation);
-
-                /*           //assigning names to the players list
-                           //doing this because we need these names throughout the map - so we are storing names in names array
-                           for (int k = 0; k < playersAI[i].T_Names.Length; k++)
-                           {
-                               playersAI[i].T_Names[j] = uIController.randomNames[Random.Range(0, playersAI[i].T_Names.Length)];
-                           }
-
-                           //adding random flags to the list
-                           //doing this because we need these flag imgs throughout the map - so we are storing flag images in flags array
-                           for (int k = 0; k < uIController.randomFlags.Length; k++)
-                           {
-                               playersAI[i].T_playersFlags[j] = uIController.randomFlags[Random.Range(0, uIController.randomFlags.Length)];
-                           }*/
 
                 //assigning player values - values are being assigned to other script attached to each player seperately
                 AI_PlayerMeta aI_PlayerStats = playerAI.GetComponentInChildren<AI_PlayerMeta>();
